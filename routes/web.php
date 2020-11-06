@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DataController;
+use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,4 +20,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [HomeController::class,'index'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function (){
+    Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
+    Route::resource('data',DataController::class);
+    Route::resource('dataset',DatasetController::class)->except([
+        'create'
+    ]);
+    Route::get('dataset/{id}/create',[DatasetController::class,'create'])->name('dataset.create');
+});
+
