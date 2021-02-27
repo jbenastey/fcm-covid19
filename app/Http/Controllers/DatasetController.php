@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class DatasetController extends Controller
 {
@@ -15,20 +14,17 @@ class DatasetController extends Controller
     public function index()
     {
         //
+        return view('dataset.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create()
     {
-        $data['data'] = DB::table('data')
-                    ->where('data_id',$id)
-                    ->first();
-        return view('data.dataset.create',$data);
+        //
     }
 
     /**
@@ -74,19 +70,6 @@ class DatasetController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = DB::table('data')
-            ->where('data_id',$id)
-            ->first();
-        $simpan = [];
-        for($i = 1; $i <= $data->data_jumlah_kriteria;$i++) {
-            $simpan['nilai_kriteria_'.$i] = $request->input('nilai_kriteria_'.$id);
-        }
-        DB::table('dataset')
-            ->insert([
-                'dataset_data_id' => $id,
-                'dataset_kriteria' => json_encode($simpan)
-            ]);
-        return redirect('data/'.$id);
     }
 
     /**

@@ -22,10 +22,6 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
-    Route::resource('data',DataController::class);
-    Route::resource('dataset',DatasetController::class)->except([
-        'create'
-    ]);
-    Route::get('dataset/{id}/create',[DatasetController::class,'create'])->name('dataset.create');
+    Route::resource('dataset',DatasetController::class);
 });
 

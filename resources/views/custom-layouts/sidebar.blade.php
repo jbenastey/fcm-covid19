@@ -14,7 +14,7 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class=" nav-item @if(request()->is('dashboard')) open @endif"><a href="{{url('dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="Email">Dashboard</span></a>
                 </li>
-                <li class=" nav-item @if(request()->is('data')) open @endif"><a href="{{url('data')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Data</span></a>
+                <li class=" nav-item @if(request()->is('dataset')) open @endif"><a href="{{url('dataset')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Dataset</span></a>
                 </li>
 {{--                <li class="has-sub nav-item @if(request()->is('master')) open @endif"><a href="javascript:;"><i class="ft-bar-chart-2"></i><span class="menu-title" data-i18n="Charts">Data Master</span></a>--}}
 {{--                    <ul class="menu-content">--}}
