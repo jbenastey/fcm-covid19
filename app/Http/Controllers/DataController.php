@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\DataImport;
+use App\Models\Data;
 use Illuminate\Http\Request;
 
 class DataController extends Controller
@@ -15,7 +16,8 @@ class DataController extends Controller
     public function index()
     {
         //
-        return view('data.index');
+        $data['data'] = Data::all();
+        return view('data.index',$data);
     }
 
     public function importExcel(Request $request){

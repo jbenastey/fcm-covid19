@@ -112,6 +112,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- BEGIN PAGE LEVEL JS-->
         <script src="{{asset('apex/app-assets/js/data-tables/dt-basic-initialization.js')}}"></script>
         <script src="{{asset('apex/app-assets/js/sweetalert2/dist/sweetalert.min.js')}}"></script>
+        <script src="{{asset('apex/app-assets/js/components-modal.min.js')}}"></script>
         <!-- END PAGE LEVEL JS-->
         <!-- BEGIN: Custom CSS-->
         <script src="{{asset('apex/assets/js/scripts.js')}}"></script>
