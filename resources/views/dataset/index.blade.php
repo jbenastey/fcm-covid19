@@ -11,7 +11,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Dataset</h4>
+                    <div class="float-right">
+                        <a href="{{route('load_dataset')}}" class="btn btn-sm btn-primary"><i class="fa fa-refresh"></i> Load Dataset</a>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -32,9 +34,39 @@
                                     <th>x10</th>
                                     <th>x11</th>
                                     <th>x12</th>
+                                    <th>x13</th>
+                                    <th>x14</th>
+                                    <th>x15</th>
+                                    <th>x16</th>
+                                    <th>x17</th>
+                                    <th>x18</th>
                                 </tr>
                                 </thead>
-
+                                <tbody>
+                                @foreach($dataset as $key => $value)
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$value->dataset_x1}}</td>
+                                        <td>{{$value->dataset_x2}}</td>
+                                        <td>{{$value->dataset_x3}}</td>
+                                        <td>{{$value->dataset_x4}}</td>
+                                        <td>{{$value->dataset_x5}}</td>
+                                        <td>{{$value->dataset_x6}}</td>
+                                        <td>{{$value->dataset_x7}}</td>
+                                        <td>{{$value->dataset_x8}}</td>
+                                        <td>{{$value->dataset_x9}}</td>
+                                        <td>{{$value->dataset_x10}}</td>
+                                        <td>{{$value->dataset_x11}}</td>
+                                        <td>{{$value->dataset_x12}}</td>
+                                        <td>{{$value->dataset_x13}}</td>
+                                        <td>{{$value->dataset_x14}}</td>
+                                        <td>{{$value->dataset_x15}}</td>
+                                        <td>{{$value->dataset_x16}}</td>
+                                        <td>{{$value->dataset_x17}}</td>
+                                        <td>{{$value->dataset_x18}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>

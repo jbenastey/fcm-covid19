@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
     Route::resource('dataset',DatasetController::class);
     Route::resource('data',DataController::class);
+    Route::get('/load_dataset', [DatasetController::class,'load'])->name('load_dataset');
 
 // Route for import excel data to database.
     Route::post('importExcel', [DataController::class, 'importExcel'])->name('importExcel');
