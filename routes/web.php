@@ -3,6 +3,7 @@
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PerhitunganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,5 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
 
 // Route for import excel data to database.
     Route::post('importExcel', [DataController::class, 'importExcel'])->name('importExcel');
+
+    Route::resource('perhitungan',PerhitunganController::class);
 });
 

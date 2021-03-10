@@ -18,6 +18,8 @@
                 </li>
                 <li class=" nav-item @if(request()->is('dataset')) open @endif"><a href="{{url('dataset')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Dataset</span></a>
                 </li>
+                <li class=" nav-item @if(request()->is('perhitungan')) open @endif"><a href="{{url('perhitungan')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Perhitungan</span></a>
+                </li>
 {{--                <li class="has-sub nav-item @if(request()->is('master')) open @endif"><a href="javascript:;"><i class="ft-bar-chart-2"></i><span class="menu-title" data-i18n="Charts">Data Master</span></a>--}}
 {{--                    <ul class="menu-content">--}}
 {{--                        <li class="@if(request()->is('master/*')) active @endif"><a href="{{url('master')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="Apex Charts">Data Kriteria</span></a>--}}
