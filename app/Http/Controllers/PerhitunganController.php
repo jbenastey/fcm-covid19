@@ -51,6 +51,7 @@ class PerhitunganController extends Controller
 //        var_dump($matriksPartAwal);
 
         $matriksPartU = [];
+        $p[0] = 0;
         for ($j = 0;$j < $maksIter; $j++){
             $p[$j+1] = 0;
             if ($j == 0){
@@ -393,12 +394,14 @@ class PerhitunganController extends Controller
                 }
 
             }
-            var_dump($p[$j+1]);
-        var_dump($matriksPartU);
+//            var_dump((number_format(abs($p[$j+1] - $p[$j]),15)));
+            if (($p[$j+1] - $p[$j] == $errorTerkecil)){
+                break;
+            }
         }
 
 
-//        var_dump($c);
+//        var_dump($p);
 //        var_dump($sumC);
 //        var_dump($pusatC);
 //        var_dump($L);
@@ -406,6 +409,18 @@ class PerhitunganController extends Controller
 //        var_dump($ML);
 //        var_dump($sumML);
 //        var_dump($matriksPartU);
+        $hasilCluster = [];
+        for ($i=0;$i<$jumlahCluster;$i++){
+            foreach ($dataset as $key=>$value) {
+                $hasilCluster[$key][$i] = $matriksPartU[$i][$key];
+            }
+        }
+        $mHasilCluster = [];
+        foreach ($dataset as $key=>$value) {
+            $mHasilCluster[$key] = (array_search(max($hasilCluster[$key]),$hasilCluster[$key]))+1;
+        }
+        var_dump($hasilCluster);
+        var_dump($mHasilCluster);
         echo "</pre>";
     }
 
