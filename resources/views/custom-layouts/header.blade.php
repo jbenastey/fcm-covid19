@@ -1,44 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-light header-navbar navbar-fixed">
-    <div class="container-fluid navbar-wrapper">
-        <div class="navbar-header d-flex">
-            <div
-                class="navbar-toggle menu-toggle d-xl-none d-block float-left align-items-center justify-content-center"
-                data-toggle="collapse"><i class="ft-menu font-medium-3"></i></div>
-            <ul class="navbar-nav">
-                <li class="nav-item mr-2 d-none d-lg-block"><a class="nav-link apptogglefullscreen"
-                                                               id="navbar-fullscreen" href="javascript:;"><i
-                            class="ft-maximize font-medium-3"></i></a></li>
-            </ul>
-        </div>
-        <div class="navbar-container">
-            <div class="collapse navbar-collapse d-block" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="dropdown nav-item mr-1"><a
-                            class="nav-link dropdown-toggle user-dropdown d-flex align-items-end" id="dropdownBasic2"
-                            href="javascript:;" data-toggle="dropdown">
-                            <div class="user d-md-flex d-none mr-2"><span class="text-right">{{ Auth::user()->name }}</span><span
-                                    class="text-right text-muted font-small-3">Available</span></div>
-                            <img class="avatar" src="{{asset('apex/app-assets/img/portrait/small/avatar-s-1.png')}}"
-                                 alt="avatar" height="35" width="35"></a>
-                        <div class="dropdown-menu text-left dropdown-menu-right m-0 pb-0"
-                             aria-labelledby="dropdownBasic2">
+<div class="topbar">
 
-                            <a class="dropdown-item" href="{{ route('profile.show') }}">
-                                <div class="d-flex align-items-center"><i class="ft-edit mr-2"></i><span>Edit Profile</span></div></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                <div class="d-flex align-items-center"><i class="ft-power mr-2"></i><span>Logout</span>
-                                </div>
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <!-- LOGO -->
+    <div class="topbar-left">
+        <a href="index.html" class="logo">
+                        <span>
+                                <img src="{{asset('veltrix/assets/images/logo-sm.png')}}" alt="" height="18">
+                            </span><span style="color: white">FCM</span>
+            <i>
+                <img src="{{asset('veltrix/assets/images/logo-sm.png')}}" alt="" height="22">
+            </i>
+        </a>
     </div>
-</nav>
-<!-- Navbar (Header) Ends-->
+
+    <nav class="navbar-custom">
+        <ul class="navbar-right list-inline float-right mb-0">
+            <!-- full screen -->
+            <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
+                <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
+                    <i class="mdi mdi-fullscreen noti-icon"></i>
+                </a>
+            </li>
+
+            <!-- notification -->
+            <li class="dropdown notification-list list-inline-item">
+                <div class="dropdown notification-list nav-pro-img">
+                    <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <img src="{{asset('veltrix/assets/images/users/user-4.jpg')}}" alt="user" class="rounded-circle">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                        <!-- item-->
+                        <a class="dropdown-item" href="{{ route('profile.show') }}"><i class="mdi mdi-account-circle m-r-5"></i> {{ Auth::user()->name }}</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+
+        <ul class="list-inline menu-left mb-0">
+            <li class="float-left">
+                <button class="button-menu-mobile open-left waves-effect">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+            </li>
+        </ul>
+
+    </nav>
+
+</div>

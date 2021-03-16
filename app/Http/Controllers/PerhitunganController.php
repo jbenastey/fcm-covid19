@@ -15,7 +15,8 @@ class PerhitunganController extends Controller
     public function index()
     {
         //
-        return view('perhitungan.index');
+        $data['hasil'] = DB::table('hasil')->get();
+        return view('perhitungan.index',$data);
     }
 
     /**
@@ -44,7 +45,6 @@ class PerhitunganController extends Controller
 
         $dataset = DB::table('dataset')->get();
 
-        echo "<pre>";
 
         $matriksPartAwal = $this->matriksPartisiAwal($jumlahCluster,count($dataset));
 
@@ -52,6 +52,9 @@ class PerhitunganController extends Controller
 
         $matriksPartU = [];
         $p[0] = 0;
+        $fungsiObjektif = [];
+        $error = [];
+
         for ($j = 0;$j < $maksIter; $j++){
             $p[$j+1] = 0;
             if ($j == 0){
@@ -395,6 +398,8 @@ class PerhitunganController extends Controller
 
             }
 //            var_dump((number_format(abs($p[$j+1] - $p[$j]),15)));
+            $fungsiObjektif[$j] = $p[$j+1];
+            $error[$j] = $p[$j+1] - $p[$j];
             if (($p[$j+1] - $p[$j] == $errorTerkecil)){
                 break;
             }
@@ -419,9 +424,20 @@ class PerhitunganController extends Controller
         foreach ($dataset as $key=>$value) {
             $mHasilCluster[$key] = (array_search(max($hasilCluster[$key]),$hasilCluster[$key]))+1;
         }
-        var_dump($hasilCluster);
-        var_dump($mHasilCluster);
-        echo "</pre>";
+
+        $simpan = [
+            'hasil_jumlah_cluster' => $jumlahCluster,
+            'hasil_iterasi' => $maksIter,
+            'hasil_error_terkecil' => $errorTerkecil,
+            'hasil_cluster_hitung' => json_encode($hasilCluster),
+            'hasil_cluster' => json_encode($mHasilCluster),
+            'hasil_fungsi_objektif' => json_encode($fungsiObjektif),
+            'hasil_error' => json_encode($error)
+        ];
+
+        DB::table('hasil')->insert($simpan);
+
+        return redirect('perhitungan');
     }
 
 
@@ -435,6 +451,10 @@ class PerhitunganController extends Controller
     public function show($id)
     {
         //
+        $data['hasil'] = DB::table('hasil')
+            ->where('hasil_id','=',$id)
+            ->first();
+        return view('perhitungan.show',$data);
     }
 
     /**

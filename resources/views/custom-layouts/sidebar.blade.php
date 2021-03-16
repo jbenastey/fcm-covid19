@@ -1,42 +1,38 @@
-<!--.main-menu(class="#{menuColor} #{menuOpenType}", class=(menuShadow == true ? 'menu-shadow' : ''))-->
-<div class="app-sidebar menu-fixed" data-background-color="man-of-steel" data-image="{{asset('apex/app-assets/img/sidebar-bg/01.jpg')}}" data-scroll-to-active="true">
-    <!-- main menu header-->
-    <!-- Sidebar Header starts-->
-    <div class="sidebar-header">
-        <div class="logo clearfix"><a class="logo-text float-left" href="{{route('dashboard')}}">
-                <div class="logo-img"><img src="{{asset('apex/app-assets/img/logo.png')}}" alt="Apex Logo"/></div><span class="text">FCM</span></a><a class="nav-toggle d-none d-lg-none d-xl-block" id="sidebarToggle" href="javascript:;"><i class="toggle-icon ft-toggle-right" data-toggle="expanded"></i></a><a class="nav-close d-block d-lg-block d-xl-none" id="sidebarClose" href="javascript:;"><i class="ft-x"></i></a></div>
-    </div>
-    <!-- Sidebar Header Ends-->
-    <!-- / main menu header-->
-    <!-- main menu content-->
-    <div class="sidebar-content main-menu-content">
-        <div class="nav-container">
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item @if(request()->is('dashboard')) open @endif"><a href="{{url('dashboard')}}"><i class="ft-home"></i><span class="menu-title" data-i18n="Email">Dashboard</span></a>
+<div class="left side-menu">
+    <div class="slimscroll-menu" id="remove-scroll">
+
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu" id="side-menu">
+                <li class="menu-title">Main</li>
+                <li>
+                    <a href="{{url('dashboard')}}" class="waves-effect">
+                        <i class="mdi mdi-home"></i><span> Dashboard </span>
+                    </a>
                 </li>
-                <li class=" nav-item @if(request()->is('data')) open @endif"><a href="{{url('data')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Data</span></a>
+                <li>
+                    <a href="{{url('data')}}" class="waves-effect">
+                        <i class="mdi mdi-database"></i><span> Data </span>
+                    </a>
                 </li>
-                <li class=" nav-item @if(request()->is('dataset')) open @endif"><a href="{{url('dataset')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Dataset</span></a>
+                <li>
+                    <a href="{{url('dataset')}}" class="waves-effect">
+                        <i class="mdi mdi-database-check"></i><span> Dataset </span>
+                    </a>
                 </li>
-                <li class=" nav-item @if(request()->is('perhitungan')) open @endif"><a href="{{url('perhitungan')}}"><i class="ft-database"></i><span class="menu-title" data-i18n="Email">Perhitungan</span></a>
+                <li>
+                    <a href="{{url('perhitungan')}}" class="waves-effect">
+                        <i class="mdi mdi-settings-outline"></i><span> Perhitungan </span>
+                    </a>
                 </li>
-{{--                <li class="has-sub nav-item @if(request()->is('master')) open @endif"><a href="javascript:;"><i class="ft-bar-chart-2"></i><span class="menu-title" data-i18n="Charts">Data Master</span></a>--}}
-{{--                    <ul class="menu-content">--}}
-{{--                        <li class="@if(request()->is('master/*')) active @endif"><a href="{{url('master')}}"><i class="ft-arrow-right submenu-icon"></i><span class="menu-item" data-i18n="Apex Charts">Data Kriteria</span></a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class=" nav-item @if(request()->is('kuesioner')) open @endif"><a href="{{url('kuesioner')}}"><i class="ft-file-text"></i><span class="menu-title" data-i18n="Email">Kuesioner</span></a>--}}
-{{--                </li>--}}
-{{--                <li class=" nav-item @if(request()->is('ahp')) open @endif"><a href="{{url('ahp')}}"><i class="ft-bar-chart-2"></i><span class="menu-title" data-i18n="Email">Analisa AHP</span></a>--}}
-{{--                </li>--}}
             </ul>
+
         </div>
+        <!-- Sidebar -->
+        <div class="clearfix"></div>
+
     </div>
-    <!-- main menu content-->
-    <div class="sidebar-background"></div>
-    <!-- main menu footer-->
-    <!-- include includes/menu-footer-->
-    <!-- main menu footer-->
-    <!-- / main menu-->
+    <!-- Sidebar -left -->
+
 </div>

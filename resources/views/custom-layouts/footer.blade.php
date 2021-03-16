@@ -1,7 +1,4 @@
 
-<!-- BEGIN : Footer-->
-<footer class="footer undefined undefined">
-    <p class="clearfix text-muted m-0"><span>Copyright  &copy; 2021 &nbsp;</span><a href="https://github.com/jbenastey" id="pixinventLink" target="_blank">jbenastey</a><span class="d-none d-sm-inline-block"></span></p>
+<footer class="footer">
+    © {{date('Y')}} jbenastey <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</span>.
 </footer>
-<!-- End : Footer--><!-- Scroll to top button -->
-<button class="btn btn-primary scroll-top" type="button"><i class="ft-arrow-up"></i></button>
