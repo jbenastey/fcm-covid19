@@ -41,8 +41,8 @@ class DatasetController extends Controller
 
         $dataset = [];
         foreach ($data as $key => $value) {
-            var_dump($value->data_nama);
             $rowDataset = [
+                'dataset_data_id' => $value->data_id,
                 'dataset_x1' => 0,
                 'dataset_x2' => 0,
                 'dataset_x3' => 0,
@@ -271,16 +271,8 @@ class DatasetController extends Controller
             array_push($dataset,$rowDataset);
         }
 
-        if (count($data) != count($dataset)){
-            if (count($data) > count($dataset)){
-                DB::table('dataset')->truncate();
-                DB::table('dataset')->insert($dataset);
-            } elseif (count($data) < count($dataset)){
-                DB::table('dataset')->truncate();
-            } else {
-                DB::table('dataset')->insert($dataset);
-            }
-        }
+        DB::table('dataset')->truncate();
+        DB::table('dataset')->insert($dataset);
 
         return redirect('dataset');
     }

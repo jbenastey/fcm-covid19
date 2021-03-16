@@ -13,6 +13,7 @@
                             <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Kode</th>
                                 <th>x1</th>
                                 <th>x2</th>
                                 <th>x3</th>
@@ -37,6 +38,7 @@
                             @foreach($dataset as $key => $value)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
+                                    <td>C{{str_pad($loop->iteration, 4, '0', STR_PAD_LEFT)}}</td>
                                     <td>{{$value->dataset_x1}}</td>
                                     <td>{{$value->dataset_x2}}</td>
                                     <td>{{$value->dataset_x3}}</td>
