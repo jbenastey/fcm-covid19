@@ -86,13 +86,10 @@
 <script src="{{asset('veltrix/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
 
 <!--Chartist Chart-->
-<script src="{{asset('veltrix/plugins/chartist/js/chartist.min.js')}}"></script>
-<script src="{{asset('veltrix/plugins/chartist/js/chartist-plugin-tooltip.min.js')}}"></script>
 
 <!-- peity JS -->
 <script src="{{asset('veltrix/plugins/peity-chart/jquery.peity.min.js')}}"></script>
 
-<script src="{{asset('veltrix/assets/pages/dashboard.js')}}"></script>
 
 <!-- Datatable init js -->
 <script src="{{asset('veltrix/assets/pages/datatables.init.js')}}"></script>

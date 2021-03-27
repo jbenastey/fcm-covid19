@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Phpml\Math\Distance\Euclidean;
 
 class PerhitunganController extends Controller
 {
@@ -415,14 +416,18 @@ class PerhitunganController extends Controller
 //        var_dump($sumML);
 //        var_dump($matriksPartU);
         $hasilCluster = [];
+        $hasilL = [];
+        $hasilLT = [];
         for ($i=0;$i<$jumlahCluster;$i++){
             foreach ($dataset as $key=>$value) {
                 $hasilCluster[$key][$i] = $matriksPartU[$i][$key];
+                $hasilL[$key][$i] = $L[$i][$key];
             }
         }
         $mHasilCluster = [];
         foreach ($dataset as $key=>$value) {
             $mHasilCluster[$key] = (array_search(max($hasilCluster[$key]),$hasilCluster[$key]))+1;
+            $hasilLT[$key] = $sumL[$key];
         }
 
         $simpan = [
@@ -430,11 +435,14 @@ class PerhitunganController extends Controller
             'hasil_iterasi' => $maksIter,
             'hasil_error_terkecil' => $errorTerkecil,
             'hasil_cluster_hitung' => json_encode($hasilCluster),
+            'hasil_L' => json_encode($hasilL),
+            'hasil_LT' => json_encode($hasilLT),
             'hasil_cluster' => json_encode($mHasilCluster),
             'hasil_fungsi_objektif' => json_encode($fungsiObjektif),
             'hasil_error' => json_encode($error)
         ];
 
+//        dd($simpan);
         DB::table('hasil')->insert($simpan);
 
         return redirect('perhitungan');
@@ -489,6 +497,136 @@ class PerhitunganController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function pengujian($id){
+        $hasil = DB::table('hasil')
+            ->where('hasil_id',$id)
+            ->first();
+        $clusterHitung = json_decode($hasil->hasil_cluster_hitung);
+        $cluster = json_decode($hasil->hasil_cluster);
+        $dataUji = [];
+        foreach ($clusterHitung as $key=>$value) {
+            array_push($dataUji,[
+                'data' => $value,
+                'cluster' => $cluster[$key]
+            ]);
+//            array_push($dataUji,$value);
+        }
+
+        $jumlahCluster = [];
+        $jumlahClusterLuar = [];
+        $dataCluster = [];
+        $dataClusterLuar = [];
+        $clusterLuar = [];
+
+        echo "<pre>";
+        foreach ($dataUji as $key=>$value) {
+            for ($i = 1;$i <= $hasil->hasil_jumlah_cluster;$i++){
+                if ($value['cluster'] == $i){
+                    $jumlahCluster[$i] = 0;
+                    $dataCluster[$i] = [];
+                } else {
+                    $clusterLuar[$key] = [];
+                    $jumlahClusterLuar[$i] = 0;
+                    $dataClusterLuar[$i] = [];
+                }
+            }
+        }
+        foreach ($dataUji as $key=>$value) {
+            for ($i = 1;$i <= $hasil->hasil_jumlah_cluster;$i++){
+                if ($value['cluster'] == $i){
+                    $jumlahCluster[$i]++;
+                    array_push($dataCluster[$i],$value);
+                } else {
+                    $jumlahClusterLuar[$i]++;
+                    array_push($dataClusterLuar[$i],$value);
+                    array_push($clusterLuar[$key],$i);
+                }
+            }
+        }
+
+        $a = [];
+        $d = [];
+        $b = [];
+        $si = [];
+        $euclidean = new Euclidean();
+//        if ($hasil->hasil_jumlah_cluster == 2){
+//            foreach ($dataCluster as $key => $value) {
+//                foreach ($value as $key2 => $value2) {
+//                    $_a = 0;
+//                    foreach ($value2['data'] as $key3 => $value3){
+//                        $_a += pow($value3,2);
+//                    }
+//                    $a[$key][$key2] = 1/count($dataUji) * sqrt($_a);
+//                }
+//            }
+            foreach ($dataUji as $key=>$value) {
+
+//                if ($key == 0){
+                $_a = 0;
+                $v2 = [];
+                foreach ($dataCluster[$value['cluster']] as $key2 => $value2) {
+//                    if ($value['data'] != $value2['data']){
+                        $v2[$key] = $value2;
+                        $_a += $euclidean->distance($value['data'],$value2['data']);
+                        $a[$key] = 1/count($dataUji) * ($_a);
+//                    }
+                }
+
+                $__d[$key] = 0;
+                $avg[$key] = [];
+//                $test = 0;
+//                    var_dump($dataClusterLuar[$value['cluster']]);
+                foreach ($dataClusterLuar[$value['cluster']] as $key3 => $value3) {
+
+                    if ($value3['cluster'] != $value['cluster']){
+//                        $test++;
+//                        var_dump($clusterLuar[$key]);
+                        foreach ($clusterLuar[$key] as $key4 => $value4){
+//                            var_dump($value3['cluster']);
+//                            var_dump($value4);
+                            if ($value3['cluster'] == $value4){
+                                $__d[$key] += $euclidean->distance($v2[$key]['data'],$value3['data']);
+
+                                $_d[$key4][$key3] = $__d[$key];
+                                $d[$key][$key4][$key3] = 1/($jumlahCluster[$value3['cluster']]) * ($_d[$key4][$key3]);
+
+                            }
+
+                        }
+                    }
+                }
+                    foreach ($d[$key] as $key5 => $value5) {
+                        $average = array_sum($value5) / count($value5);
+                        array_push($avg[$key],$average);
+                }
+                $b[$key] = min($avg[$key]);
+                $si[$key] = $b[$key] - $a[$key] / max($a[$key],$b[$key]);
+
+                }
+//            }
+//        }
+//        var_dump($a);
+//        var_dump($b);
+//        var_dump($d);
+        var_dump($si);
+        echo "</pre>";
+
+//        dd($d);
+//        dd($d);
+//        dd($si);
+
+    }
+
+    private function _enculide($i1,$i2){
+
+        $r = 0;
+        foreach ($i2 as $a => $v){
+            $temp = $v[$a] - $i1;
+            $r +=$temp * $temp;
+        }
+        return pow($r,2);
     }
 
     function matriksPartisiAwal($jumlahCluster,$jumlahData){

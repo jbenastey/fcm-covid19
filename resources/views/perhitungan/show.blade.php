@@ -91,4 +91,15 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-body">
+                        <a href="{{route('pengujian',$hasil->hasil_id)}}">Hitung Pengujian</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

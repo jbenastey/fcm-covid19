@@ -31,5 +31,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function (){
     Route::post('importExcel', [DataController::class, 'importExcel'])->name('importExcel');
 
     Route::resource('perhitungan',PerhitunganController::class);
+    Route::get('/pengujian/{id}', [PerhitunganController::class,'pengujian'])->name('pengujian');
 });
 

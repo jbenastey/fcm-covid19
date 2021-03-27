@@ -26,6 +26,11 @@
                         <i class="mdi mdi-settings-outline"></i><span> Perhitungan </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{url('pengujian')}}" class="waves-effect">
+                        <i class="mdi mdi-settings"></i><span> Pengujian </span>
+                    </a>
+                </li>
             </ul>
 
         </div>
