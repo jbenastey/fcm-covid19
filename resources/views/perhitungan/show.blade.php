@@ -31,7 +31,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
@@ -96,7 +96,35 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <a href="{{route('pengujian',$hasil->hasil_id)}}">Hitung Pengujian</a>
+                        <h6 class="mt-0">Pengujian Silhouette Coefficient</h6>
+                        <hr>
+                        @if($uji == null)
+                            <a href="{{route('pengujian',$hasil->hasil_id)}}" class="btn btn-sm btn-primary">Hitung Pengujian</a>
+                        @else
+                            <table class="table table-striped table-bordered zero-configuration">
+                                <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>SI</th>
+                                </tr>
+                                </thead>
+                                @php
+                                    $si = json_decode($uji->uji_si);
+                                @endphp
+                                @foreach($si as $key=>$value)
+                                    <tr>
+                                        <td>C{{str_pad($loop->iteration, 4, '0', STR_PAD_LEFT)}}</td>
+                                        <td>{{$value}}</td>
+                                    </tr>
+                                @endforeach
+                                <tfoot>
+                                <tr>
+                                    <th>SI Global</th>
+                                    <th>{{$uji->uji_si_global}}</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        @endif
                     </div>
                 </div>
             </div>
