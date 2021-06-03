@@ -16,7 +16,9 @@ class PerhitunganController extends Controller
     public function index()
     {
         //
-        $data['hasil'] = DB::table('hasil')->get();
+        $data['hasil'] = DB::table('hasil')
+            ->orderBy('hasil_date_created','DESC')
+            ->get();
         return view('perhitungan.index',$data);
     }
 
@@ -401,13 +403,15 @@ class PerhitunganController extends Controller
 //            var_dump((number_format(abs($p[$j+1] - $p[$j]),15)));
             $fungsiObjektif[$j] = $p[$j+1];
             $error[$j] = $p[$j+1] - $p[$j];
-            if (($p[$j+1] - $p[$j] == $errorTerkecil)){
+            if ((abs($p[$j+1] - $p[$j]) <= $errorTerkecil)){
                 break;
             }
         }
 
 
-//        var_dump($p);
+//        echo "<pre>";
+//
+//        var_dump($c);
 //        var_dump($sumC);
 //        var_dump($pusatC);
 //        var_dump($L);
@@ -415,6 +419,8 @@ class PerhitunganController extends Controller
 //        var_dump($ML);
 //        var_dump($sumML);
 //        var_dump($matriksPartU);
+//        var_dump($matriksPartAwal);
+//        echo "</pre>";
         $hasilCluster = [];
         $hasilL = [];
         $hasilLT = [];
@@ -579,18 +585,19 @@ class PerhitunganController extends Controller
                 array_push($avg[$key],$average);
             }
             $b[$key] = min($avg[$key]);
-            $si[$key] = $b[$key] - $a[$key] / max($a[$key],$b[$key]);
+            $si[$key] = ($b[$key] - $a[$key]) / max($a[$key],$b[$key]);
         }
+        dd($si);
 
-        $simpan = [
-            'uji_hasil_id' => $id,
-            'uji_si' => json_encode($si),
-            'uji_si_global' => array_sum($si) / count($si)
-        ];
-
-        DB::table('uji')->insert($simpan);
-
-        return redirect('perhitungan/'.$id);
+//        $simpan = [
+//            'uji_hasil_id' => $id,
+//            'uji_si' => json_encode($si),
+//            'uji_si_global' => array_sum($si) / count($si)
+//        ];
+//
+//        DB::table('uji')->insert($simpan);
+//
+//        return redirect('perhitungan/'.$id);
 
     }
 

@@ -26,7 +26,7 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$value->hasil_jumlah_cluster}}</td>
                                         <td>{{$value->hasil_iterasi}}</td>
-                                        <td>{{$value->hasil_error_terkecil}}</td>
+                                        <td>{{number_format(abs($value->hasil_error_terkecil), 6, '.', '')}}</td>
                                         <td>
                                             <a href="{{route('perhitungan.show',$value->hasil_id)}}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> Lihat</a>
                                         </td>

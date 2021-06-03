@@ -22,7 +22,7 @@
                             <tr>
                                 <td>Error Terkecil</td>
                                 <td>: </td>
-                                <td>{{$hasil->hasil_error_terkecil}}</td>
+                                <td>{{number_format(abs($hasil->hasil_error_terkecil), 6, '.', '')}}</td>
                             </tr>
                         </table>
                     </div>
@@ -31,13 +31,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
                         <h6 class="mt-0">Hasil Cluster</h6>
                         <hr>
-                        <table class="table table-striped table-bordered zero-configuration">
+                        <table class="table table-striped table-bordered one-configuration">
                             <thead>
                             <tr>
                                 <th>Kode</th>
@@ -55,12 +55,18 @@
                                 </tr>
                             @endforeach
                             </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Hasil Cluster</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
+        <div class="col-sm-6">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
@@ -82,7 +88,7 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$value}}</td>
-                                    <td>{{$hasilError[$key]}}</td>
+                                    <td>{{number_format(abs($hasilError[$key]), 6, '.', '')}}</td>
                                 </tr>
                             @endforeach
                         </table>
@@ -108,6 +114,7 @@
                                     <th>SI</th>
                                 </tr>
                                 </thead>
+                                <tbody>
                                 @php
                                     $si = json_decode($uji->uji_si);
                                 @endphp
@@ -117,6 +124,7 @@
                                         <td>{{$value}}</td>
                                     </tr>
                                 @endforeach
+                                </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>SI Global</th>
