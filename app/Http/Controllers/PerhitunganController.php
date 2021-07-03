@@ -587,17 +587,16 @@ class PerhitunganController extends Controller
             $b[$key] = min($avg[$key]);
             $si[$key] = ($b[$key] - $a[$key]) / max($a[$key],$b[$key]);
         }
-        dd($si);
 
-//        $simpan = [
-//            'uji_hasil_id' => $id,
-//            'uji_si' => json_encode($si),
-//            'uji_si_global' => array_sum($si) / count($si)
-//        ];
-//
-//        DB::table('uji')->insert($simpan);
-//
-//        return redirect('perhitungan/'.$id);
+        $simpan = [
+            'uji_hasil_id' => $id,
+            'uji_si' => json_encode($si),
+            'uji_si_global' => array_sum($si) / count($si)
+        ];
+
+        DB::table('uji')->insert($simpan);
+
+        return redirect('perhitungan/'.$id);
 
     }
 

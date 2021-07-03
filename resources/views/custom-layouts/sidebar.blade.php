@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('pengujian')}}" class="waves-effect">
+                    <a href="{{url('uji')}}" class="waves-effect">
                         <i class="mdi mdi-settings"></i><span> Pengujian </span>
                     </a>
                 </li>
