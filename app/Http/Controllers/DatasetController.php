@@ -32,6 +32,7 @@ class DatasetController extends Controller
             ->where('data_nama','!=','-')
             ->where('data_usia','!=','-')
             ->where('data_penghasilan','!=','-')
+            ->where('data_penghasilan','!=','0')
             ->where('data_tanggungan','!=','-')
             ->where('data_nik','!=','-')
             ->where('data_pekerjaan','!=','-')
@@ -64,24 +65,18 @@ class DatasetController extends Controller
             ];
 
             //x1
-            if ($value->data_usia >= 15 && $value->data_usia <= 20){
-                $rowDataset['dataset_x1'] = 5;
-            } elseif ($value->data_usia > 50 && $value->data_usia <= 60){
-                $rowDataset['dataset_x1'] = 4;
-            } elseif ($value->data_usia > 40 && $value->data_usia <= 50){
+            if ($value->data_usia > 64){
                 $rowDataset['dataset_x1'] = 3;
-            } elseif ($value->data_usia > 20 && $value->data_usia <= 30){
+            } elseif ($value->data_usia > 15 && $value->data_usia <= 64){
                 $rowDataset['dataset_x1'] = 2;
-            } elseif ($value->data_usia > 30 && $value->data_usia <= 40){
+            } elseif ($value->data_usia < 14){
                 $rowDataset['dataset_x1'] = 1;
-            } else {
-                $rowDataset['dataset_x1'] = 5;
             }
 
             //x2
             if ($value->data_penghasilan <= 500000){
                 $rowDataset['dataset_x2'] = 5;
-            } elseif ($value->data_penghasilan > 500 && $value->data_penghasilan <= 1000000){
+            } elseif ($value->data_penghasilan > 500000 && $value->data_penghasilan <= 1000000){
                 $rowDataset['dataset_x2'] = 4;
             } elseif ($value->data_penghasilan > 1000000 && $value->data_penghasilan <= 1500000){
                 $rowDataset['dataset_x2'] = 3;
@@ -92,7 +87,7 @@ class DatasetController extends Controller
             }
 
             //x3
-            if ($value->data_tanggungan <= 7){
+            if ($value->data_tanggungan >= 7){
                 $rowDataset['dataset_x3'] = 5;
             } elseif ($value->data_tanggungan > 4 && $value->data_tanggungan <= 6){
                 $rowDataset['dataset_x3'] = 4;
@@ -121,54 +116,78 @@ class DatasetController extends Controller
             } elseif (str_contains(strtolower($value->data_pekerjaan),'guru')
                 || (str_contains(strtolower($value->data_pekerjaan),'mengajar'))
                 || (str_contains(strtolower($value->data_pekerjaan),'dosen'))
+                || (str_contains(strtolower($value->data_pekerjaan),'imam'))
                 || (str_contains(strtolower($value->data_pekerjaan),'wartawan'))
             ){
                 $rowDataset['dataset_x5'] = 3;
             } elseif (str_contains(strtolower($value->data_pekerjaan),'wiraswasta')
                 || str_contains(strtolower($value->data_pekerjaan),'swasta')
                 || str_contains(strtolower($value->data_pekerjaan),'karyawan')
+                || str_contains(strtolower($value->data_pekerjaan),'karyaswasta')
                 || str_contains(strtolower($value->data_pekerjaan),'kedai')
                 || str_contains(strtolower($value->data_pekerjaan),'pedagang')
+                || str_contains(strtolower($value->data_pekerjaan),'dagang')
+                || str_contains(strtolower($value->data_pekerjaan),'berdagang')
+                || str_contains(strtolower($value->data_pekerjaan),'berjualan')
                 || str_contains(strtolower($value->data_pekerjaan),'ampera')
                 || str_contains(strtolower($value->data_pekerjaan),'satpam')
                 || str_contains(strtolower($value->data_pekerjaan),'usaha')
                 || str_contains(strtolower($value->data_pekerjaan),'ukm')
+                || str_contains(strtolower($value->data_pekerjaan),'umk')
+                || str_contains(strtolower($value->data_pekerjaan),'pijat')
                 || str_contains(strtolower($value->data_pekerjaan),'laundry')
                 || str_contains(strtolower($value->data_pekerjaan),'sales')
                 || str_contains(strtolower($value->data_pekerjaan),'spg')
+                || str_contains(strtolower($value->data_pekerjaan),'katering')
                 || str_contains(strtolower($value->data_pekerjaan),'warung')
                 || str_contains(strtolower($value->data_pekerjaan),'kantin')
                 || str_contains(strtolower($value->data_pekerjaan),'reklame')
-                || str_contains(strtolower($value->data_pekerjaan),'online')
                 || str_contains(strtolower($value->data_pekerjaan),'lapau')
                 || str_contains(strtolower($value->data_pekerjaan),'pangkas')
+                || str_contains(strtolower($value->data_pekerjaan),'klinik')
                 || str_contains(strtolower($value->data_pekerjaan),'penyewaan')
                 || str_contains(strtolower($value->data_pekerjaan),'bengkel')
             ){
                 $rowDataset['dataset_x5'] = 6;
             } elseif (str_contains(strtolower($value->data_pekerjaan),'buruh')
                 || str_contains(strtolower($value->data_pekerjaan),'jual')
+                || str_contains(strtolower($value->data_pekerjaan),'jualan')
                 || str_contains(strtolower($value->data_pekerjaan),'bhl')
                 || str_contains(strtolower($value->data_pekerjaan),'gojek')
+                || str_contains(strtolower($value->data_pekerjaan),'gocar')
                 || str_contains(strtolower($value->data_pekerjaan),'bangunan')
                 || str_contains(strtolower($value->data_pekerjaan),'grab')
                 || str_contains(strtolower($value->data_pekerjaan),'ojek')
                 || str_contains(strtolower($value->data_pekerjaan),'supir')
                 || str_contains(strtolower($value->data_pekerjaan),'sopir')
+                || str_contains(strtolower($value->data_pekerjaan),'galon')
+                || str_contains(strtolower($value->data_pekerjaan),'ulang')
                 || str_contains(strtolower($value->data_pekerjaan),'jahit')
                 || str_contains(strtolower($value->data_pekerjaan),'industri')
                 || str_contains(strtolower($value->data_pekerjaan),'ibu')
+                || str_contains(strtolower($value->data_pekerjaan),'jasa')
+                || str_contains(strtolower($value->data_pekerjaan),'irt')
+                || str_contains(strtolower($value->data_pekerjaan),'cabe')
                 || str_contains(strtolower($value->data_pekerjaan),'harian')
+                || str_contains(strtolower($value->data_pekerjaan),'rumah')
+                || str_contains(strtolower($value->data_pekerjaan),'jaga')
                 || str_contains(strtolower($value->data_pekerjaan),'parkir')
+                || str_contains(strtolower($value->data_pekerjaan),'kuli')
+                || str_contains(strtolower($value->data_pekerjaan),'online')
+
             ){
                 $rowDataset['dataset_x5'] = 10;
             } elseif (str_contains(strtolower($value->data_pekerjaan),'tukang')
+                || str_contains(strtolower($value->data_pekerjaan),'cs')
+                || str_contains(strtolower($value->data_pekerjaan),'cleaning')
             ){
                 $rowDataset['dataset_x5'] = 8;
             }elseif (str_contains(strtolower($value->data_pekerjaan),'petani')
             ){
                 $rowDataset['dataset_x5'] = 7;
             }elseif (str_contains(strtolower($value->data_pekerjaan),'mekanik')
+                || str_contains(strtolower($value->data_pekerjaan),'fotocopy')
+                || str_contains(strtolower($value->data_pekerjaan),'kuliner')
             ){
                 $rowDataset['dataset_x5'] = 9;
             }elseif (str_contains(strtolower($value->data_pekerjaan),'pns')

@@ -471,6 +471,9 @@ class PerhitunganController extends Controller
         $data['uji'] = DB::table('uji')
             ->where('uji_hasil_id','=',$id)
             ->first();
+        $data['dataset'] = DB::table('dataset')
+            ->join('data','data_id','=','dataset_data_id')
+            ->get();
         return view('perhitungan.show',$data);
     }
 

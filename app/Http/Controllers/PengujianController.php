@@ -91,7 +91,7 @@ class PengujianController extends Controller
         $data = DB::table('uji')
             ->select('hasil_jumlah_cluster','uji_si_global')
             ->join('hasil','hasil.hasil_id','=','uji.uji_hasil_id')
-            ->orderBy('uji_id','DESC')
+            ->orderBy('uji_hasil_id','ASC')
             ->get();
 
         $nama = [];
